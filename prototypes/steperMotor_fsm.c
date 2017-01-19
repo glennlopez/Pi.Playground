@@ -4,8 +4,9 @@
    sudo ./NAME
 */
 
-#include <stdio.h>
-#include <pigpio.h>
+#include <stdio.h>		//standard lib
+#include <pigpio.h>		//for gpio
+ #include <unistd.h>		//for usleep
 
 struct fsmData{
 	void (*out)(void);
@@ -20,20 +21,20 @@ void S1(); void S4(); void S7();
 void S2(); void S5(); void S8();
 void S3(); void S6(); void S9();
 
+/* SWITCH 
+	0 = 00
+	1 = 01
+	2 = 10
+	3 = 11
+*/
+
 FSM Motor[10] = {
-	{&S0,	0.05,	{1,1,1,1}},
+	//					 0 1 2 3
+	{&S0,	10000,	{1,0,0,0}},
 
-	{&S1,	1,	{1,1,1,1}},
-	{&S2,	1,	{1,1,1,1}},
-	{&S3,	1,	{1,1,1,1}},
-
-	{&S4,	1,	{1,1,1,1}},
-	{&S5,	1,	{1,1,1,1}},
-	{&S6,	1,	{1,1,1,1}},
-
-	{&S7,	1,	{1,1,1,1}},
-	{&S8,	1,	{1,1,1,1}},
-	{&S9,	1,	{1,1,1,1}},
+	{&S1,	10000,	{2,0,0,0}},
+	{&S2,	10000,	{3,0,0,0}},
+	{&S3,	10000,	{0,0,0,0}},
 };
 
 unsigned int cState, input, output;
@@ -58,12 +59,14 @@ int main (){
 	gpioSetMode(13, PI_OUTPUT);
 	gpioSetMode(26, PI_OUTPUT);
 
+	gpioSetMode(27, PI_OUTPUT);
+
 
 	while(1){
 		gpioWrite(27, 1);
-		time_sleep(Motor[0].delay);
+		usleep(Motor[0].delay);
 		gpioWrite(27, 0);
-		time_sleep(Motor[0].delay);
+		usleep(Motor[0].delay);
 
 	}
 
@@ -81,6 +84,30 @@ int main (){
 /***************
 	FUNCTION
 ***************/
-void S0(){
-   gpioWrite(5, 1);
+void S0(){						//0x05
+   gpioWrite(5,	0);
+   gpioWrite(6,	1);
+   gpioWrite(13,	0);
+   gpioWrite(26,	1);
+}
+
+void S1(){						//0x06
+   gpioWrite(5,	0);
+   gpioWrite(6,	1);
+   gpioWrite(13,	1);
+   gpioWrite(26,	0);
+}
+
+void S2(){						//0x0A
+   gpioWrite(5,	1);
+   gpioWrite(6,	0);
+   gpioWrite(13,	1);
+   gpioWrite(26,	0);
+}
+
+void S3(){						//0x09
+   gpioWrite(5,	1);
+   gpioWrite(6,	0);
+   gpioWrite(13,	0);
+   gpioWrite(26,	1);
 }
