@@ -21,7 +21,7 @@ void S1(); void S4(); void S7();
 void S2(); void S5(); void S8();
 void S3(); void S6(); void S9();
 
-/* SWITCH 
+/* INPUTS
 	0 = 00
 	1 = 01
 	2 = 10
@@ -30,7 +30,7 @@ void S3(); void S6(); void S9();
 
 FSM Motor[10] = {
 	//					 0 1 2 3
-	{&S0,	10000,	{1,0,0,0}},
+	{&S0,	10000,	{1,0,0,0}},	//initial state
 
 	{&S1,	10000,	{2,0,0,0}},
 	{&S2,	10000,	{3,0,0,0}},
@@ -59,14 +59,12 @@ int main (){
 	gpioSetMode(13, PI_OUTPUT);
 	gpioSetMode(26, PI_OUTPUT);
 
-	gpioSetMode(27, PI_OUTPUT);
-
 
 	while(1){
-		gpioWrite(27, 1);
-		usleep(Motor[0].delay);
-		gpioWrite(27, 0);
-		usleep(Motor[0].delay);
+
+		Motor[cState].out();
+		usleep(Motor[cState].delay);
+		cState = Motor[cState].next[0];
 
 	}
 
