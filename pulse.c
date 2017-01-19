@@ -39,11 +39,11 @@ int main(int argc, char *argv[])
    {
       gpioWrite(27, 1); /* on */
 
-      time_sleep(0.5);
+      time_sleep(0);
 
       gpioWrite(27, 0); /* off */
 
-      time_sleep(0.5);
+      time_sleep(0);
 
       /* Mirror GPIO24 from GPIO23 */
       gpioWrite(24, gpioRead(23));
