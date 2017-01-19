@@ -12,7 +12,6 @@ struct fsmData{
 	void (*out)(void);
 	long delay;
 	unsigned int next[4];
-
 }; typedef const struct fsmData FSM;
 
 //state function prototypes
@@ -21,15 +20,8 @@ void S1(); void S4(); void S7();
 void S2(); void S5(); void S8();
 void S3(); void S6(); void S9();
 
-/* INPUTS
-	0 = 00
-	1 = 01
-	2 = 10
-	3 = 11
-*/
-
 FSM Motor[10] = {
-	//				 0 1 2 3
+	//inputs-->	 0 1 2 3
 	{&S0,	5000,	{1,3,0,0}},	//initial state
 
 	{&S1,	5000,	{2,0,0,0}},
@@ -37,7 +29,6 @@ FSM Motor[10] = {
 	{&S3,	5000,	{0,2,0,0}},
 };
 
-unsigned int cState;
 
 
 
@@ -46,9 +37,10 @@ unsigned int cState;
 /***************
 	MAIN
 ***************/
-int main (){
-	if (gpioInitialise() < 0)
-   {
+int main (){ unsigned int cState;
+
+	//GPIO init error prompt
+	if (gpioInitialise() < 0){
       fprintf(stderr, "pigpio initialisation failed\n");
       return 1;
    }
@@ -59,8 +51,7 @@ int main (){
 	gpioSetMode(13, PI_OUTPUT);
 	gpioSetMode(26, PI_OUTPUT);
 
-
-	while(1){	unsigned int step, i, j, dir;
+	while(1){ unsigned int i, j, step, dir;
 
 		printf("[0]forward or [1]backwards: ");
 		scanf("%i", &dir);
@@ -68,8 +59,10 @@ int main (){
 		printf("How many steps: ");
 		scanf("%i", &step);
 
+		printf("\n");		//newline
 
-		//1 step
+
+		//Finite state machine loop
 		for(i = 0; i < step; i++){
 			for(j = 0; j < 4; j++){
 				usleep(Motor[cState].delay);
@@ -77,11 +70,7 @@ int main (){
 				usleep(Motor[cState].delay);
 				cState = Motor[cState].next[dir];
 			}
-
 		}
-
-
-
 	}
 
 	printf("\n");		//newline
