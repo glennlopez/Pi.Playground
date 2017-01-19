@@ -29,15 +29,15 @@ void S3(); void S6(); void S9();
 */
 
 FSM Motor[10] = {
-	//					 0 1 2 3
-	{&S0,	5000,	{1,0,0,0}},	//initial state
+	//				 0 1 2 3
+	{&S0,	5000,	{1,3,0,0}},	//initial state
 
-	{&S1,	5000,	{2,0,0,0}},
-	{&S2,	5000,	{3,0,0,0}},
+	{&S1,	5000,	{2,2,0,0}},
+	{&S2,	5000,	{3,1,0,0}},
 	{&S3,	5000,	{0,0,0,0}},
 };
 
-unsigned int cState, input, output;
+unsigned int cState;
 
 
 
@@ -60,7 +60,10 @@ int main (){
 	gpioSetMode(26, PI_OUTPUT);
 
 
-	while(1){	unsigned int step, i,j;
+	while(1){	unsigned int step, i, j, dir;
+
+		printf("[0]forward or [1]backwards: ");
+		scanf("%i", &dir);
 
 		printf("How many steps: ");
 		scanf("%i", &step);
@@ -72,7 +75,7 @@ int main (){
 				usleep(Motor[cState].delay);
 				Motor[cState].out();
 				usleep(Motor[cState].delay);
-				cState = Motor[cState].next[0];
+				cState = Motor[cState].next[dir];
 			}
 
 		}
