@@ -60,11 +60,22 @@ int main (){
 	gpioSetMode(26, PI_OUTPUT);
 
 
-	while(1){
+	while(1){	unsigned int step, i,j;
 
-		Motor[cState].out();
-		usleep(Motor[cState].delay);
-		cState = Motor[cState].next[0];
+		step = 5;
+
+		//1 step
+		for(i = 0; i < step; i++){
+			for(j = 0; j < 4; j++){
+				usleep(Motor[cState].delay);
+				Motor[cState].out();
+				usleep(Motor[cState].delay);
+				cState = Motor[cState].next[0];
+			}
+
+		}
+
+
 
 	}
 
