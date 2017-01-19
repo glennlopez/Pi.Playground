@@ -62,7 +62,9 @@ int main (){
 
 	while(1){	unsigned int step, i,j;
 
-		step = 5;
+		printf("How many steps: ");
+		scanf("%i", &step);
+
 
 		//1 step
 		for(i = 0; i < step; i++){
