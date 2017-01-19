@@ -1,12 +1,3 @@
-#include <stdio.h>
-#include <cstdlib>		//required for syste();
-
-int main(){
-	system("ls");
-
-	printf("\n");	//newline
-	return 0;
-}
 /*
    pulse.c
 
@@ -32,7 +23,7 @@ int main(int argc, char *argv[])
    /* Set GPIO modes */
    gpioSetMode(4, PI_OUTPUT);
    gpioSetMode(17, PI_OUTPUT);
-   gpioSetMode(18, PI_OUTPUT);
+   gpioSetMode(27, PI_OUTPUT);
    gpioSetMode(23, PI_INPUT);
    gpioSetMode(24, PI_OUTPUT);
 
@@ -46,11 +37,11 @@ int main(int argc, char *argv[])
 
    while ((time_time() - start) < 60.0)
    {
-      gpioWrite(18, 1); /* on */
+      gpioWrite(27, 1); /* on */
 
       time_sleep(0.5);
 
-      gpioWrite(18, 0); /* off */
+      gpioWrite(27, 0); /* off */
 
       time_sleep(0.5);
 
