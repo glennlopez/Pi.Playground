@@ -6,7 +6,7 @@
 
 #include <stdio.h>		//standard lib
 #include <pigpio.h>		//for gpio
- #include <unistd.h>		//for usleep
+#include <unistd.h>		//for usleep
 
 struct fsmData{
 	void (*out)(void);
@@ -20,13 +20,15 @@ void S1(); void S4(); void S7();
 void S2(); void S5(); void S8();
 void S3(); void S6(); void S9();
 
+unsigned int speed = 1000;
+
 FSM Motor[10] = {
 	//inputs-->	 0 1 2 3
-	{&S0,	5000,	{1,3,0,0}},	//initial state
+	{&S0,	speed,	{1,3,0,0}},	//initial state
 
-	{&S1,	5000,	{2,0,0,0}},
-	{&S2,	5000,	{3,1,0,0}},
-	{&S3,	5000,	{0,2,0,0}},
+	{&S1,	speed,	{2,0,0,0}},
+	{&S2,	speed,	{3,1,0,0}},
+	{&S3,	speed,	{0,2,0,0}},
 };
 
 
@@ -50,6 +52,9 @@ int main (){ unsigned int cState;
 	gpioSetMode(6, PI_OUTPUT);
 	gpioSetMode(13, PI_OUTPUT);
 	gpioSetMode(26, PI_OUTPUT);
+
+	printf("Set the speed (1000): ");
+	scanf("%i", &speed);
 
 	while(1){ unsigned int i, j, step, dir;
 
