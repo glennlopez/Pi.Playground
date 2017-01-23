@@ -102,11 +102,13 @@ int main(){ unsigned int cState, input;
 	}
 */
 
-	//delay debug
-	gpioWrite(9, 	0);		// 0 - South GREEN
-	delay(1);
-	gpioWrite(9, 	1);		// 0 - South GREEN
-	delay(1);
+	while(1){
+		//delay debug
+		gpioWrite(9, 	0);		// 0 - South GREEN
+		delay(1);
+		gpioWrite(9, 	1);		// 0 - South GREEN
+		delay(1);
+	}
 
 
 	//raspi cleanup routine
