@@ -1,7 +1,7 @@
 /*
    pulse.c
 
-   gcc -o pulse pulse.c -lpigpio -lrt -lpthread
+   c
 
    sudo ./pulse
 */
