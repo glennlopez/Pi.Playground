@@ -75,14 +75,13 @@ FSM Lights[9] = {
 	MAIN
 ************/
 int main(){ unsigned int cState, input;
-/*
+
 	//raspi SETUP
 	if (gpioInitialise() < 0){
 		fprintf(stderr, "pigpio initialisation failed\n");
 		return 1;
 	}
 	initPortRaspi();
-*/
 
 	//fsm SETUP
 	cState = 0;
