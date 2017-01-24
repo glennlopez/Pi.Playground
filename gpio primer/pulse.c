@@ -1,7 +1,8 @@
 /*
    pulse.c
 
-   c
+	gcc -o test trafficLight_fsm.c -lpigpio -lrt -lpthread
+
 
    sudo ./pulse
 */
