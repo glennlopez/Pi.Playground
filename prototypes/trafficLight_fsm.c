@@ -49,7 +49,7 @@ struct DataSet{
 #define FF2	8
 
 //function prototype
-void delay(int num);
+void delay(unsigned int num);
 void initPortRaspi(void);
 
 //function (*pointer) prototype
@@ -104,9 +104,9 @@ int main(){ unsigned int cState, input;
 
 	while(1){
 		//delay debug
-		gpioWrite(9, 	0);		// 0 - South GREEN
+		gpioWrite(9, 0);
 		delay(1);
-		gpioWrite(9, 	1);		// 0 - South GREEN
+		gpioWrite(9, 1);
 		delay(1);
 	}
 
@@ -123,26 +123,32 @@ int main(){ unsigned int cState, input;
 /*******************
 	FUNCTIONS
 ********************/
-void delay(int num){
+void delay(unsigned int num){unsigned int i;
+	for(i = 0; i < num; i++){
+		unsigned int j;
+		for(j = 0; j < 2000; j++){
+
+		}
+	}
 }
 
 //Raspbery pi port initialization
 void initPortRaspi(void){
 
-	gpioSetMode(16, PI_INPUT);		// 0 - West Sensor
-	gpioSetMode(20, PI_INPUT);		// 1 - South Sensor
-	gpioSetMode(21, PI_INPUT);		// 2 - Pedestrian Sensor
+	gpioSetMode(16, 				PI_INPUT);		// 0 - West Sensor
+	gpioSetMode(20, 				PI_INPUT);		// 1 - South Sensor
+	gpioSetMode(21, 				PI_INPUT);		// 2 - Pedestrian Sensor
 
-	gpioSetMode(9, PI_OUTPUT);		// 0 - South GREEN
-	gpioSetMode(11, PI_OUTPUT);	// 1 - South YELLOW
-	gpioSetMode(0, PI_OUTPUT);		// 2 - South RED
+	gpioSetMode(9, 	/*MISO*/	PI_OUTPUT);		// 0 - South GREEN
+	gpioSetMode(11, 	/*SCLK*/	PI_OUTPUT);		// 1 - South YELLOW
+	gpioSetMode(0, 	/*ID_SD*/PI_OUTPUT);		// 2 - South RED
 
-	gpioSetMode(5, PI_OUTPUT);		// 3 - West GREEN
-	gpioSetMode(6, PI_OUTPUT);		// 4 - West YELLOW
-	gpioSetMode(13, PI_OUTPUT);	// 5 - West RED
+	gpioSetMode(5, 				PI_OUTPUT);		// 3 - West GREEN
+	gpioSetMode(6, 				PI_OUTPUT);		// 4 - West YELLOW
+	gpioSetMode(13, 				PI_OUTPUT);		// 5 - West RED
 
-	gpioSetMode(19, PI_OUTPUT);	// 6 - Pedestrian RED
-	gpioSetMode(26, PI_OUTPUT);	// 7 - Pedestrian GREEN
+	gpioSetMode(19, 				PI_OUTPUT);		// 6 - Pedestrian RED
+	gpioSetMode(26, 				PI_OUTPUT);		// 7 - Pedestrian GREEN
 }
 
 
