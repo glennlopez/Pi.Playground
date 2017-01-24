@@ -104,9 +104,9 @@ int main(){ unsigned int cState, input;
 
 	while(1){
 		//delay debug
-		gpioWrite(9, 0);
+		gpioWrite(26, 0);
 		delay(1);
-		gpioWrite(9, 1);
+		gpioWrite(26, 1);
 		delay(1);
 	}
 
@@ -125,10 +125,8 @@ int main(){ unsigned int cState, input;
 ********************/
 void delay(unsigned int num){unsigned int i;
 	for(i = 0; i < num; i++){
-		unsigned int j;
-		for(j = 0; j < 2000; j++){
-
-		}
+		//raspi delay
+		gpioDelay(1000);	//1ms
 	}
 }
 
