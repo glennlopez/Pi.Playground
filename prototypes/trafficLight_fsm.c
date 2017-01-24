@@ -75,15 +75,15 @@ FSM Lights[9] = {
 	MAIN
 ************/
 int main(){ unsigned int cState, input;
-
+/*
 	//raspi SETUP
 	if (gpioInitialise() < 0){
 		fprintf(stderr, "pigpio initialisation failed\n");
 		return 1;
 	}
 	initPortRaspi();
+*/
 
-/*
 	//fsm SETUP
 	cState = 0;
 
@@ -100,15 +100,8 @@ int main(){ unsigned int cState, input;
 		//change state based on input and current state
 		cState = Lights[cState].next[input];
 	}
-*/
 
-	while(1){
-		//delay debug
-		gpioWrite(26, 0);
-		delay(1);
-		gpioWrite(26, 1);
-		delay(1);
-	}
+
 
 
 	//raspi cleanup routine
@@ -125,8 +118,7 @@ int main(){ unsigned int cState, input;
 ********************/
 void delay(unsigned int num){unsigned int i;
 	for(i = 0; i < num; i++){
-		//raspi delay
-		gpioDelay(1000);	//1ms
+		gpioDelay(1000);	//raspi delay in 1000 = 1ms
 	}
 }
 
