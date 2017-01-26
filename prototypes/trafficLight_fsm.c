@@ -71,6 +71,9 @@ FSM Lights[9] = {
 };
 
 
+
+
+
 /************
 	MAIN
 ************/
@@ -101,13 +104,15 @@ int main(){ unsigned int cState, input;
 	}
 
 
-
-
 	//raspi cleanup routine
    gpioTerminate();
 	printf("\n");
 	return 0;
 }
+
+
+
+
 
 
 
@@ -123,6 +128,10 @@ void delay(unsigned int num){unsigned int i;
 
 //Raspbery pi port initialization
 void initPortRaspi(void){
+
+	gpioSetPullUpDown(16, PI_PUD_DOWN); // Set 16 to pull-down.
+	gpioSetPullUpDown(20, PI_PUD_DOWN); // Set 20 to pull-down.
+	gpioSetPullUpDown(21, PI_PUD_DOWN); // Set 21 to pull-down.
 
 	gpioSetMode(16, 				PI_INPUT);		// 0 - West Sensor
 	gpioSetMode(20, 				PI_INPUT);		// 1 - South Sensor
