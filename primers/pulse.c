@@ -14,7 +14,6 @@ int main(int argc, char *argv[])
 {
 
 	/* RasPi Setup routine */
-   double start;
    if (gpioInitialise() < 0)
    {
       fprintf(stderr, "pigpio initialisation failed\n");
@@ -25,14 +24,12 @@ int main(int argc, char *argv[])
    gpioSetMode(23, PI_OUTPUT);
 
 	/* RasPi loop subroutine */
-   start = time_time();
-   while ((time_time() - start) < 60.0)
-   {
-      gpioWrite(23, 1); /* on */
+	while(1){
+		gpioWrite(23, 1); /* on */
       usleep(delayParam);
       gpioWrite(23, 0); /* off */
       usleep(delayParam);
-   }
+	}
 
    /* Stop DMA, release resources */
    gpioTerminate();
