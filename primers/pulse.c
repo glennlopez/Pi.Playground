@@ -8,7 +8,7 @@
 #include <pigpio.h>		//for gpio
 #include <unistd.h>		//for usleep
 
-#define delayParam 5000
+#define delayParam 1000	//1000 = 1ms
 
 int main(int argc, char *argv[])
 {
