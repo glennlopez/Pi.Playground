@@ -3,6 +3,7 @@
    NAME.c
    gcc -o NAME NAME.c -lpigpio -lrt -lpthread
    sudo ./NAME
+	 Note: This version is stable
 */
 
 #include <stdio.h>		//standard lib
