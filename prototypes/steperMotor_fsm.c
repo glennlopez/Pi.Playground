@@ -1,4 +1,5 @@
 /*
+	 BY: Glenn Lopez
    NAME.c
    gcc -o NAME NAME.c -lpigpio -lrt -lpthread
    sudo ./NAME
