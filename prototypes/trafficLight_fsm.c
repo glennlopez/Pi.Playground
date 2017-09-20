@@ -1,4 +1,5 @@
 /*
+	By: Glenn Lopez
 	gcc -o test trafficLight_fsm.c -lpigpio -lrt -lpthread
 
 	3 inputs: 	2 car sensors, 1 pedestrian
